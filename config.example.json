@@ -1,0 +1,17 @@
+{
+  "assistant_name": "",
+  "setup_stage": "not_started",
+  "setup_steps_done": "",
+  "next_step": "",
+  "business_name": "",
+  "currency": "",
+  "timezone": "",
+  "founder_email": "",
+  "eod_cutoff": "",
+  "summary_time": "",
+  "closers_enabled": "yes",
+  "setters_enabled": "yes",
+  "ads_enabled": "yes",
+  "sheet_url": "",
+  "dashboard_url": ""
+}

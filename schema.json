@@ -1,0 +1,114 @@
+{
+  "version": "1.0.0",
+  "description": "The data contract. Every form field, ledger column and metric is defined here. Owned by the data-mapper. Change this first, then the code.",
+  "forms": {
+    "closer_eod": {
+      "title": "Closer EOD Report",
+      "description": "Fill this in once at the end of every working day. All numbers are for that day only. A deposit is not a close: when a deposit's balance is closed later, log it that day as a paid-in-full or payment-plan close.",
+      "compartment": "closers",
+      "role": "closer",
+      "ledger": "Closer Ledger",
+      "responsesTab": "Closer EOD Responses",
+      "fields": [
+        { "key": "date", "label": "Date of this report", "type": "date", "required": true, "page": 1 },
+        { "key": "person", "label": "Closer", "type": "person", "required": true, "page": 1 },
+        { "key": "day_off", "label": "Did you work today?", "type": "dayoff", "required": true, "page": 1 },
+        { "key": "calls_on_calendar", "label": "Calls on your calendar today", "type": "count", "required": true, "page": 2 },
+        { "key": "shows_new", "label": "Shows: new calls", "type": "count", "required": true, "page": 2 },
+        { "key": "shows_followup", "label": "Shows: follow-up calls", "type": "count", "required": true, "page": 2 },
+        { "key": "no_shows", "label": "No-shows", "type": "count", "required": true, "page": 2 },
+        { "key": "reschedules", "label": "Reschedules", "type": "count", "required": true, "page": 2 },
+        { "key": "cancelled", "label": "Cancelled", "type": "count", "required": true, "page": 2 },
+        { "key": "disqualified", "label": "Disqualified (showed, not a fit)", "type": "count", "required": true, "page": 2 },
+        { "key": "offers", "label": "Offers made", "type": "count", "required": true, "page": 2 },
+        { "key": "closes_pif", "label": "Closes: paid in full", "type": "count", "required": true, "page": 2 },
+        { "key": "closes_pp", "label": "Closes: payment plan", "type": "count", "required": true, "page": 2 },
+        { "key": "deposits", "label": "Deposits taken (balance not yet closed)", "type": "count", "required": true, "page": 2 },
+        { "key": "contract_value", "label": "Contract value closed (paid-in-full + payment-plan closes)", "type": "money", "required": true, "page": 2 },
+        { "key": "cash_upfront", "label": "Cash collected: upfront (paid in full)", "type": "money", "required": true, "page": 2 },
+        { "key": "cash_pp", "label": "Cash collected: payment plan (first payments and instalments)", "type": "money", "required": true, "page": 2 },
+        { "key": "cash_deposit", "label": "Cash collected: deposits", "type": "money", "required": true, "page": 2 },
+        { "key": "notes", "label": "Notes (optional)", "type": "text", "required": false, "page": 2 }
+      ]
+    },
+    "setter_eod": {
+      "title": "Setter EOD Report",
+      "description": "Fill this in once at the end of every working day. All numbers are for that day only.",
+      "compartment": "setters",
+      "role": "setter",
+      "ledger": "Setter Ledger",
+      "responsesTab": "Setter EOD Responses",
+      "fields": [
+        { "key": "date", "label": "Date of this report", "type": "date", "required": true, "page": 1 },
+        { "key": "person", "label": "Setter", "type": "person", "required": true, "page": 1 },
+        { "key": "day_off", "label": "Did you work today?", "type": "dayoff", "required": true, "page": 1 },
+        { "key": "conversations", "label": "Conversations", "type": "count", "required": true, "page": 2 },
+        { "key": "qualified_conversations", "label": "Qualified conversations", "type": "count", "required": true, "page": 2 },
+        { "key": "calls_booked", "label": "Calls booked", "type": "count", "required": true, "page": 2 },
+        { "key": "notes", "label": "Notes (optional)", "type": "text", "required": false, "page": 2 }
+      ]
+    },
+    "ad_spend": {
+      "title": "Manual Ad Spend",
+      "description": "Founder only. Use this for ad spend on platforms other than Meta, or to replace Meta's automatic numbers for a date.",
+      "compartment": "ads",
+      "role": null,
+      "ledger": "Ads",
+      "responsesTab": "Ad Spend Responses",
+      "fields": [
+        { "key": "date", "label": "Date", "type": "date", "required": true, "page": 1 },
+        { "key": "platform", "label": "Platform", "type": "choice", "required": true, "page": 1, "choices": ["Meta", "Google", "YouTube", "TikTok", "Other"] },
+        { "key": "spend", "label": "Spend", "type": "money", "required": true, "page": 1 },
+        { "key": "impressions", "label": "Impressions", "type": "count", "required": true, "page": 1 },
+        { "key": "clicks", "label": "Clicks", "type": "count", "required": true, "page": 1 },
+        { "key": "override", "label": "Meta only: replace the automatic Meta numbers for this date?", "type": "yesno", "required": true, "page": 1 }
+      ]
+    },
+    "refund": {
+      "title": "Refund or Chargeback",
+      "description": "Founder only. Log each refund or chargeback on the day it happened.",
+      "compartment": "closers",
+      "role": "closer",
+      "ledger": "Refunds",
+      "responsesTab": "Refund Responses",
+      "fields": [
+        { "key": "date", "label": "Date", "type": "date", "required": true, "page": 1 },
+        { "key": "person", "label": "Closer on the deal", "type": "person", "required": true, "page": 1 },
+        { "key": "amount", "label": "Amount refunded", "type": "money", "required": true, "page": 1 },
+        { "key": "kind", "label": "Type", "type": "choice", "required": true, "page": 1, "choices": ["Refund", "Chargeback"] },
+        { "key": "notes", "label": "Notes (optional)", "type": "text", "required": false, "page": 1 }
+      ]
+    }
+  },
+  "ledgerMetaColumns": ["response_id", "submitted_at"],
+  "ledgerTailColumns": ["flags", "source"],
+  "adsColumns": ["date", "platform", "spend", "impressions", "clicks", "source", "override", "response_id", "synced_at"],
+  "teamColumns": ["id", "name", "email", "role", "status", "working_days", "start_date", "end_date"],
+  "roles": ["closer", "setter", "both"],
+  "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  "metrics": [
+    { "key": "spend", "label": "Spend", "kind": "sum", "format": "money", "inputs": ["ads.spend"] },
+    { "key": "ctr", "label": "CTR", "kind": "rate", "format": "percent", "inputs": ["ads.clicks", "ads.impressions"], "formula": "Σ clicks ÷ Σ impressions" },
+    { "key": "cpc", "label": "CPC", "kind": "ratio", "format": "money", "inputs": ["ads.spend", "ads.clicks"], "formula": "Σ spend ÷ Σ clicks" },
+    { "key": "conversations", "label": "Conversations", "kind": "sum", "format": "count", "inputs": ["setter_eod.conversations"] },
+    { "key": "calls_booked", "label": "Calls booked", "kind": "sum", "format": "count", "inputs": ["setter_eod.calls_booked"] },
+    { "key": "booking_rate", "label": "Booking rate", "kind": "rate", "format": "percent", "inputs": ["setter_eod.calls_booked", "setter_eod.conversations"], "formula": "Σ calls booked ÷ Σ conversations" },
+    { "key": "cost_per_booked_call", "label": "Cost per booked call", "kind": "ratio", "format": "money", "inputs": ["ads.spend", "setter_eod.calls_booked", "closer_eod.calls_on_calendar"], "formula": "Σ spend ÷ Σ calls booked (Σ calls on calendar when setters are off)" },
+    { "key": "calls_on_calendar", "label": "Calls on calendar", "kind": "sum", "format": "count", "inputs": ["closer_eod.calls_on_calendar"] },
+    { "key": "show_rate", "label": "Show rate", "kind": "rate", "format": "percent", "inputs": ["closer_eod.shows_new", "closer_eod.shows_followup", "closer_eod.no_shows"], "formula": "Σ shows ÷ (Σ shows + Σ no-shows)" },
+    { "key": "dq_rate", "label": "DQ rate", "kind": "rate", "format": "percent", "inputs": ["closer_eod.disqualified", "closer_eod.shows_new"], "formula": "Σ DQ ÷ Σ new-call shows" },
+    { "key": "offer_rate", "label": "Offer rate", "kind": "rate", "format": "percent", "inputs": ["closer_eod.offers", "closer_eod.shows_new"], "formula": "Σ offers ÷ Σ new-call shows" },
+    { "key": "closes", "label": "Closes", "kind": "sum", "format": "count", "inputs": ["closer_eod.closes_pif", "closer_eod.closes_pp"] },
+    { "key": "close_rate", "label": "Close rate", "kind": "rate", "format": "percent", "inputs": ["closer_eod.closes_pif", "closer_eod.closes_pp", "closer_eod.shows_new"], "formula": "Σ closes ÷ Σ new-call shows" },
+    { "key": "deposit_rate", "label": "Deposit rate", "kind": "rate", "format": "percent", "inputs": ["closer_eod.deposits", "closer_eod.shows_new"], "formula": "Σ deposits ÷ Σ new-call shows" },
+    { "key": "cash_collected", "label": "Cash collected", "kind": "sum", "format": "money", "inputs": ["closer_eod.cash_upfront", "closer_eod.cash_pp", "closer_eod.cash_deposit"] },
+    { "key": "refunds", "label": "Refunds", "kind": "sum", "format": "money", "inputs": ["refund.amount"] },
+    { "key": "net_cash", "label": "Net cash", "kind": "sum", "format": "money", "inputs": ["closer_eod.cash_upfront", "closer_eod.cash_pp", "closer_eod.cash_deposit", "refund.amount"], "formula": "Σ cash collected − Σ refunds" },
+    { "key": "payment_mix_pif", "label": "Paid in full share", "kind": "rate", "format": "percent", "inputs": ["closer_eod.closes_pif", "closer_eod.closes_pp"], "formula": "Σ paid-in-full closes ÷ Σ closes" },
+    { "key": "contract_value", "label": "Contract value", "kind": "sum", "format": "money", "inputs": ["closer_eod.contract_value"] },
+    { "key": "aov", "label": "AOV", "kind": "ratio", "format": "money", "inputs": ["closer_eod.contract_value", "closer_eod.closes_pif", "closer_eod.closes_pp"], "formula": "Σ contract value ÷ Σ closes" },
+    { "key": "cpa", "label": "CPA", "kind": "ratio", "format": "money", "inputs": ["ads.spend", "closer_eod.closes_pif", "closer_eod.closes_pp"], "formula": "Σ spend ÷ Σ closes" },
+    { "key": "roas_cash", "label": "ROAS (cash)", "kind": "ratio", "format": "multiple", "inputs": ["closer_eod.cash_upfront", "closer_eod.cash_pp", "closer_eod.cash_deposit", "ads.spend"], "formula": "Σ cash collected in period ÷ Σ spend" },
+    { "key": "roas_contract", "label": "ROAS (contract)", "kind": "ratio", "format": "multiple", "inputs": ["closer_eod.contract_value", "ads.spend"], "formula": "Σ contract value ÷ Σ spend" }
+  ]
+}
